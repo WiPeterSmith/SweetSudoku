@@ -33,5 +33,20 @@ def checkRow(row):
     return False
 
 # if __name__ == '__main__':
-main()
+# main()
+
+def validate(row, column):
+    if value not in row and value not in column:
+        return True
+
+
+def getbox(rowNum, columnNum):
+    boxRow = int(rowNum/3)
+    boxColumn = int(columnNum/3)
+    print(boxRow, boxColumn)
+
+def Box(boxRow, boxColumn):
+    
+
+
 
