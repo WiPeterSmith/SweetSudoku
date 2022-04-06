@@ -14,25 +14,40 @@ def main():
     #     print(row)
     solver(puzzle)
 
-
+# Returns puzzle completely solved if valid
 def solver(puzzle):
     print("doing stuff")
-    for row in puzzle: # this isnt right. We want the position of the row, since we need it in validate.
-        for index in range(len(row)):
-            if row[index] == 0:
-                validate(puzzle, row, index, row[index], 1) # Value needs to be iterated, not hard codes. So should be 1-9
+    # iterate over each of the rows.
+    for row in puzzle:
+        # iterate over each of the columns.
+        for cell_column in range(len(row)):
+            # if we find an unfilled cell, check all the numbers 1-9 and see if there is a single possible choice.
+            # if there is a single choice fill it in and continue.
+            if row[cell_column] == 0:
+                only_possible_number = False;
+                for number in range(1, 10):
+                    if only_possible_number is True:
+                        temp = validate(puzzle, row, cell_column, number)
+                        if temp is True:
+                            print(row)
+                            print(cell_column)
+                            break
+                    else:
+                        only_possible_number = validate(puzzle, row, cell_column, number)
 
-            print('This is index {} with value {}'.format(index, row[index]))
 
-
+# Takes individual entry value and determines if it is valid entry returns bool
 def validate(puzzle, row, index, value):
     column = getcolumn(puzzle, index)
     boxCoordinate = getboxcoordinates(0, index)
     box = getbox(puzzle, boxCoordinate[0], boxCoordinate[1])
+    # already have row so, just use it
 
     for value in range(9):
         if value not in row and value not in column and value not in box:
             return True
+
+    return False
 
 
 def getboxcoordinates(y, x):
@@ -41,9 +56,11 @@ def getboxcoordinates(y, x):
     return boxRow, boxColumn
 
 
-def getbox(puzzle, boxRow, boxColumn):
-    rowStartPosition = boxRow * 3
-    columnStartPosition = boxColumn * 3
+# Helper function to grab the box from an index and return that box as an array,
+# since we can't use the arrays like we do in each of the rows.
+def getbox(puzzle, box_row, box_column):
+    rowStartPosition = box_row * 3
+    columnStartPosition = box_column * 3
     array = []
     for x in range(rowStartPosition, rowStartPosition+3):
         for y in range(columnStartPosition, columnStartPosition+3):
@@ -51,8 +68,13 @@ def getbox(puzzle, boxRow, boxColumn):
     return array
 
 
+# Helper function to grab the column from an index and return that box as an array,
+# since we can't use the arrays like we do in each of the rows.
 def getcolumn(puzzle, index):
     array = []
     for i in range(9):
         array.append(puzzle[i][index])
     return array
+
+
+main()
