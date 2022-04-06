@@ -18,19 +18,24 @@ def main():
 def solver(puzzle):
     print("doing stuff")
     # iterate over each of the rows.
-    for row in puzzle:
+    for row_number in range(len(puzzle)):
+        print('Row {}'.format(row))
         # iterate over each of the columns.
         for cell_column in range(len(row)):
             # if we find an unfilled cell, check all the numbers 1-9 and see if there is a single possible choice.
             # if there is a single choice fill it in and continue.
             if row[cell_column] == 0:
-                only_possible_number = False;
+                # Begin with only_possible_number assumed false
+                only_possible_number = False
                 for number in range(1, 10):
+                    print(number)
                     if only_possible_number is True:
                         temp = validate(puzzle, row, cell_column, number)
                         if temp is True:
-                            print(row)
-                            print(cell_column)
+                            # print(row)
+                            # print(cell_column)
+                            # print('only number is {}'.format(number))
+
                             break
                     else:
                         only_possible_number = validate(puzzle, row, cell_column, number)
@@ -39,15 +44,14 @@ def solver(puzzle):
 # Takes individual entry value and determines if it is valid entry returns bool
 def validate(puzzle, row, index, value):
     column = getcolumn(puzzle, index)
-    boxCoordinate = getboxcoordinates(0, index)
+    boxCoordinate = getboxcoordinates(0, index) # Add row number not 0
     box = getbox(puzzle, boxCoordinate[0], boxCoordinate[1])
     # already have row so, just use it
 
-    for value in range(9):
-        if value not in row and value not in column and value not in box:
-            return True
-
-    return False
+    if value not in row and value not in column and value not in box:
+        return True
+    else:
+        return False
 
 
 def getboxcoordinates(y, x):
