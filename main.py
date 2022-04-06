@@ -45,7 +45,9 @@ def solver(puzzle):
                         # We want to save the number once we
                         if only_possible_number is True:
                             number_selected = number
-                puzzle[row_number][column_number] = number_selected
+
+                if only_possible_number is True:
+                    puzzle[row_number][column_number] = number_selected
                 # print('There is only one number possible: {}'.format(number_selected))
 
     return puzzle
