@@ -16,6 +16,26 @@ def main():
     print("This is your puzzle after running solver :) ")
     for row in puzzle:
         print(row)
+    puzzle = solver(puzzle)
+    print("This is your puzzle after running solver :) ")
+    for row in puzzle:
+        print(row)
+    puzzle = solver(puzzle)
+    print("This is your puzzle after running solver :) ")
+    for row in puzzle:
+        print(row)
+    puzzle = solver(puzzle)
+    print("This is your puzzle after running solver :) ")
+    for row in puzzle:
+        print(row)
+    puzzle = solver(puzzle)
+    print("This is your puzzle after running solver :) ")
+    for row in puzzle:
+        print(row)
+    puzzle = solver(puzzle)
+    print("This is your puzzle after running solver :) ")
+    for row in puzzle:
+        print(row)
 
 # Returns puzzle completely solved if valid
 def solver(puzzle):
@@ -39,6 +59,7 @@ def solver(puzzle):
                     if only_possible_number is True:
                         temp = validate(puzzle, row, row_number, column_number, number)
                         if temp is True:
+                            only_possible_number = False
                             break
                     else:
                         only_possible_number = validate(puzzle, row, row_number, column_number, number)
